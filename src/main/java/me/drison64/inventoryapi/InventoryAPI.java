@@ -1,11 +1,20 @@
 package me.drison64.inventoryapi;
 
-import org.bukkit.inventory.Inventory;
+import org.bukkit.Bukkit;
+import org.bukkit.plugin.java.JavaPlugin;
 
 public class InventoryAPI {
 
-    public CustomInventory create(Inventory inventory) {
-        return new CustomInventory(inventory);
+    private InventoryManager inventoryManager;
+
+    public InventoryAPI() {
+
+        inventoryManager = new InventoryManager();
+
+    }
+
+    public InventoryManager getInventoryManager() {
+        return inventoryManager;
     }
 
 }
