@@ -2,12 +2,11 @@ package me.drison64.inventoryapi;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
-import org.bukkit.event.player.PlayerEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 
 public class EventListener implements Listener {
 
@@ -18,22 +17,23 @@ public class EventListener implements Listener {
     }
 
     @EventHandler
-    public void onEventa(PlayerEvent e) {
-        inventoryAPI.getInventoryManager().fire(e.getPlayer(), e);
+    public void onEvent(PlayerQuitEvent e) {
+        inventoryAPI.getInventoryManager().close(e.getPlayer(), false);
     }
 
     @EventHandler
-    public void onEvents(InventoryClickEvent e) {
+    public void onEvent(InventoryClickEvent e) {
         inventoryAPI.getInventoryManager().fire((Player) e.getWhoClicked(), e);
     }
 
     @EventHandler
-    public void onEventd(InventoryCloseEvent e) {
+    public void onEvent(InventoryCloseEvent e) {
+        inventoryAPI.getInventoryManager().close((Player) e.getPlayer(), false);
         inventoryAPI.getInventoryManager().fire((Player) e.getPlayer(), e);
     }
 
     @EventHandler
-    public void onEventf(InventoryOpenEvent e) {
+    public void onEvent(InventoryOpenEvent e) {
         inventoryAPI.getInventoryManager().fire((Player) e.getPlayer(), e);
     }
 

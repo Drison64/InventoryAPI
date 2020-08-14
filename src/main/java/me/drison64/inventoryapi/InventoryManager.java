@@ -18,6 +18,16 @@ public class InventoryManager {
         player.openInventory(inventory.build());
     }
 
+    public void close(Player player, Boolean close) {
+        if (close) player.closeInventory();
+        registeredPlayers.remove(player);
+    }
+
+    public void close(Player player) {
+        player.closeInventory();
+        registeredPlayers.remove(player);
+    }
+
     public void fire(Player player, Event event) {
         registeredPlayers.get(player).fire(event);
     }
