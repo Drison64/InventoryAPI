@@ -10,7 +10,7 @@ public class InventoryAPI {
 
         plugin.getServer().getPluginManager().registerEvents(new EventListener(this), plugin);
 
-        inventoryManager = new InventoryManager();
+        inventoryManager = new InventoryManager(plugin);
 
     }
 

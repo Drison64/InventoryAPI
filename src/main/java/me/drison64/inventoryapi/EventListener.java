@@ -29,7 +29,6 @@ public class EventListener implements Listener {
     @EventHandler
     public void onEvent(InventoryCloseEvent e) {
         inventoryAPI.getInventoryManager().fire((Player) e.getPlayer(), e);
-        inventoryAPI.getInventoryManager().close((Player) e.getPlayer(), false);
     }
 
     @EventHandler
