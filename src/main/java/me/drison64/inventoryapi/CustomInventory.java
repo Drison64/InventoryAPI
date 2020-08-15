@@ -12,6 +12,7 @@ public abstract class CustomInventory {
 
     private HashMap<Integer, ItemStack> items;
     protected String title;
+    protected String originalTitle;
     protected Integer size;
     protected InventoryType inventoryType;
 
