@@ -20,6 +20,12 @@ public abstract class CustomInventory {
         init(items);
     }
 
+    public CustomInventory(InventoryType inventoryType) {
+        this.items = new HashMap<>();
+        this.inventoryType = inventoryType;
+        init(items);
+    }
+
     public void set(Integer slot, ItemStack itemStack) {
         items.put(slot, itemStack);
     }
