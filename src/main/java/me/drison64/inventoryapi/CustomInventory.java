@@ -1,12 +1,15 @@
 package me.drison64.inventoryapi;
 
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public abstract class CustomInventory {
 
@@ -18,13 +21,11 @@ public abstract class CustomInventory {
 
     public CustomInventory() {
         this.items = new HashMap<>();
-        init(items);
     }
 
     public CustomInventory(InventoryType inventoryType) {
         this.items = new HashMap<>();
         this.inventoryType = inventoryType;
-        init(items);
     }
 
     public void set(Integer slot, ItemStack itemStack) {
@@ -38,6 +39,9 @@ public abstract class CustomInventory {
     }
 
     public Inventory build() {
+        synchronized (this) {
+            init(items);
+        }
         Inventory inventory;
         if (inventoryType == null) {
             inventory = Bukkit.createInventory(null, size, title);
@@ -47,6 +51,7 @@ public abstract class CustomInventory {
         for (int i = 0; i < size + 1; i++) {
             if (!(items.get(i) == null)) inventory.setItem(i, items.get(i));
         }
+        items = null;
         return inventory;
     }
 

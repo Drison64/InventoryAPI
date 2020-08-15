@@ -2,6 +2,7 @@ package me.drison64.inventoryapi;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
@@ -18,7 +19,7 @@ public class EventListener implements Listener {
 
     @EventHandler
     public void onEvent(PlayerQuitEvent e) {
-        inventoryAPI.getInventoryManager().close(e.getPlayer(), false);
+        inventoryAPI.getInventoryManager().fire((Player) e.getPlayer(), e);
     }
 
     @EventHandler

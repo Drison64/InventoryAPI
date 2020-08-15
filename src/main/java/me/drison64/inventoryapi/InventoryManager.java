@@ -19,6 +19,7 @@ public class InventoryManager {
     }
 
     public void open(CustomInventory inventory, Player player) {
+        if (registeredPlayers.containsKey(player)) registeredPlayers.remove(player);
         registeredPlayers.put(player, inventory);
         player.openInventory(inventory.build());
     }
@@ -34,9 +35,10 @@ public class InventoryManager {
     }
 
     public void fire(Player player, Event event) {
-        CustomInventory inventory = registeredPlayers.get(player);
-        registeredPlayers.remove(player);
-        inventory.fire(event);
+        registeredPlayers.get(player).fire(event);
     }
 
+    public HashMap<Player, CustomInventory> getRegisteredPlayers() {
+        return registeredPlayers;
+    }
 }
