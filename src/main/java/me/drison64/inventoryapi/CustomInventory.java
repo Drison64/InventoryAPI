@@ -48,7 +48,7 @@ public abstract class CustomInventory {
         } else {
             inventory = Bukkit.createInventory(null, inventoryType, title);
         }
-        for (int i = 0; i < size + 1; i++) {
+        for (int i = 0; i < size; i++) {
             if (!(items.get(i) == null)) inventory.setItem(i, items.get(i));
         }
         items = null;
