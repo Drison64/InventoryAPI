@@ -39,12 +39,10 @@ public abstract class CustomInventory {
 
     public Inventory refresh() {
         Inventory inventory_ = null;
-        if (player.getInventory() == this.inventory) {
-            inventory_ = build();
-            System.out.println(inventory_.getContents().length);
-            player.getOpenInventory().getTopInventory().setContents(inventory.getContents());
-            player.updateInventory();
-        }
+        inventory_ = build();
+        System.out.println(inventory_.getContents().length);
+        player.getOpenInventory().getTopInventory().setContents(inventory.getContents());
+        player.updateInventory();
         return inventory_;
     }
 
@@ -71,6 +69,7 @@ public abstract class CustomInventory {
             if (!(items.get(i) == null)) inventory.setItem(i, items.get(i));
         }
         //items = null;
+        this.inventory = inventory;
         return inventory;
     }
 
