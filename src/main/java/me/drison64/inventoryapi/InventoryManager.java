@@ -1,9 +1,8 @@
 package me.drison64.inventoryapi;
 
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
-import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.HashMap;
@@ -18,19 +17,26 @@ public class InventoryManager {
         this.plugin = plugin;
     }
 
-    public void open(CustomInventory inventory, Player player) {
+    public Inventory open(CustomInventory inventory, Player player) {
         if (registeredPlayers.containsKey(player)) registeredPlayers.remove(player);
         registeredPlayers.put(player, inventory);
-        player.openInventory(inventory.build());
+        Inventory inventory_ = inventory.build(player);
+        player.openInventory(inventory_);
+        return inventory_;
     }
 
     public void close(Player player, Boolean close) {
-        if (close) player.closeInventory();
         registeredPlayers.remove(player);
+        if (close) player.closeInventory();
     }
 
     public void close(Player player) {
         player.closeInventory();
+        registeredPlayers.remove(player);
+    }
+
+    public void lastFire(Player player, Event event) {
+        registeredPlayers.get(player).fire(event);
         registeredPlayers.remove(player);
     }
 

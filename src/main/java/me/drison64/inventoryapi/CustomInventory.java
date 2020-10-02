@@ -6,18 +6,17 @@ import org.bukkit.event.Event;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-
 import java.util.HashMap;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 public abstract class CustomInventory {
 
     private HashMap<Integer, ItemStack> items;
     protected String title;
     protected String originalTitle;
-    protected Integer size;
+    protected int size;
     protected InventoryType inventoryType;
+    protected Player player;
+    protected Inventory inventory;
 
     public CustomInventory() {
         this.items = new HashMap<>();
@@ -38,7 +37,27 @@ public abstract class CustomInventory {
         }
     }
 
+    public Inventory refresh() {
+        Inventory inventory_ = null;
+        if (player.getInventory() == this.inventory) {
+            inventory_ = build();
+            System.out.println(inventory_.getContents().length);
+            player.getOpenInventory().getTopInventory().setContents(inventory.getContents());
+            player.updateInventory();
+        }
+        return inventory_;
+    }
+
     public Inventory build() {
+        return doBuild();
+    }
+
+    public Inventory build(Player player) {
+        this.player = player;
+        return doBuild();
+    }
+
+    public Inventory doBuild() {
         synchronized (this) {
             init(items);
         }
@@ -51,7 +70,7 @@ public abstract class CustomInventory {
         for (int i = 0; i < size; i++) {
             if (!(items.get(i) == null)) inventory.setItem(i, items.get(i));
         }
-        items = null;
+        //items = null;
         return inventory;
     }
 
