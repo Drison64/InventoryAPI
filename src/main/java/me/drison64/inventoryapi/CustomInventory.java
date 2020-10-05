@@ -11,6 +11,7 @@ import java.util.HashMap;
 public abstract class CustomInventory {
 
     private HashMap<Integer, ItemStack> items;
+    private boolean close;
     protected String title;
     protected String originalTitle;
     protected int size;
@@ -20,10 +21,12 @@ public abstract class CustomInventory {
 
     public CustomInventory() {
         this.items = new HashMap<>();
+        this.close = true;
     }
 
     public CustomInventory(InventoryType inventoryType) {
         this.items = new HashMap<>();
+        this.close = true;
         this.inventoryType = inventoryType;
     }
 
@@ -71,6 +74,14 @@ public abstract class CustomInventory {
         //items = null;
         this.inventory = inventory;
         return inventory;
+    }
+
+    public boolean isClose() {
+        return close;
+    }
+
+    public void setClose(boolean close) {
+        this.close = close;
     }
 
     protected abstract void init(HashMap<Integer, ItemStack> items);

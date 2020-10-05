@@ -3,22 +3,19 @@ package me.drison64.inventoryapi;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.HashMap;
 
 public class InventoryManager {
 
-    private HashMap<Player, CustomInventory> registeredPlayers;
-    private JavaPlugin plugin;
+    private final HashMap<Player, CustomInventory> registeredPlayers;
 
-    public InventoryManager(JavaPlugin plugin) {
+    public InventoryManager() {
         registeredPlayers = new HashMap<>();
-        this.plugin = plugin;
     }
 
     public Inventory open(CustomInventory inventory, Player player) {
-        if (registeredPlayers.containsKey(player)) registeredPlayers.remove(player);
+        if (!(registeredPlayers.get(player) == null))   if (inventory.getClass() == registeredPlayers.get(player).getClass())   inventory.setClose(false);
         registeredPlayers.put(player, inventory);
         Inventory inventory_ = inventory.build(player);
         player.openInventory(inventory_);
