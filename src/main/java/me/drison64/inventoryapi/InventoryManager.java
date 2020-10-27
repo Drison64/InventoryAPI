@@ -1,22 +1,32 @@
 package me.drison64.inventoryapi;
 
+import me.drison64.inventoryapi.properties.InventoryProperty;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.inventory.Inventory;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class InventoryManager {
 
     private final HashMap<Player, CustomInventory> registeredPlayers;
+    private final HashMap<CustomInventory, List<InventoryProperty>> registeredProperties;
+    private final InventoryAPI inventoryAPI;
 
-    public InventoryManager() {
+    public InventoryManager(InventoryAPI inventoryAPI) {
+        this.inventoryAPI = inventoryAPI;
         registeredPlayers = new HashMap<>();
+        registeredProperties = new HashMap<>();
     }
 
-    public Inventory open(CustomInventory inventory, Player player) {
+    public Inventory open(CustomInventory inventory, Player player, InventoryProperty... inventoryProperties) {
         if (!(registeredPlayers.get(player) == null))   if (inventory.getClass() == registeredPlayers.get(player).getClass())   inventory.setClose(false);
         registeredPlayers.put(player, inventory);
+        for (InventoryProperty inventoryProperty : inventoryProperties) {
+            registerProperty(inventory, inventoryProperty);
+        }
         Inventory inventory_ = inventory.build(player);
         player.openInventory(inventory_);
         return inventory_;
@@ -41,7 +51,19 @@ public class InventoryManager {
         registeredPlayers.get(player).fire(event);
     }
 
+    public void registerProperty(CustomInventory customInventory, InventoryProperty property) {
+        if (!(registeredProperties.containsKey(customInventory))) {
+            registeredProperties.put(customInventory, new ArrayList<>());
+        }
+        registeredProperties.get(customInventory).add(property);
+    }
+
     public HashMap<Player, CustomInventory> getRegisteredPlayers() {
         return registeredPlayers;
     }
+
+    public HashMap<CustomInventory, List<InventoryProperty>> getRegisteredProperties() {
+        return registeredProperties;
+    }
+
 }

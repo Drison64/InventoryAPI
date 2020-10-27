@@ -1,5 +1,6 @@
 package me.drison64.inventoryapi;
 
+import me.drison64.inventoryapi.properties.InventoryProperty;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
@@ -18,6 +19,7 @@ public abstract class CustomInventory {
     protected InventoryType inventoryType;
     protected Player player;
     protected Inventory inventory;
+    protected InventoryProperty[] properties;
 
     public CustomInventory() {
         this.items = new HashMap<>();
