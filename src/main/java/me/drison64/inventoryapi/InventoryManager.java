@@ -21,12 +21,12 @@ public class InventoryManager {
 
     public Inventory open(CustomInventory inventory, Player player, InventoryProperty... inventoryProperties) {
         if (registeredPlayers.get(player) != null && inventory.getClass() == registeredPlayers.get(player).getClass()) inventory.setClose(false);
-        registeredPlayers.put(player, inventory);
         for (InventoryProperty inventoryProperty : inventoryProperties) {
             registerProperty(inventory, inventoryProperty);
         }
         Inventory inventory_ = inventory.build(player);
         player.openInventory(inventory_);
+        registeredPlayers.put(player, inventory);
         return inventory_;
     }
 
