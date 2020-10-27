@@ -34,7 +34,7 @@ public class ItemStackUtils {
             return skull;
         ItemMeta skullMeta = skull.getItemMeta();
         skullMeta.setDisplayName(ChatColor.translateAlternateColorCodes('&', name));
-        if (!(desc.toString().length() < 1)) {
+        if (desc.toString().length() >= 1) {
             skullMeta.setLore(desc);
         }
         GameProfile profile = new GameProfile(UUID.randomUUID(), null);
