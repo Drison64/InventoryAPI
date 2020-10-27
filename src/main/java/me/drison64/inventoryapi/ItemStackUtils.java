@@ -66,7 +66,7 @@ public class ItemStackUtils {
         ItemStack item = new ItemStack(Material.PLAYER_HEAD, count);
         SkullMeta meta = (SkullMeta) item.getItemMeta();
         meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', name));
-        if (!(desc.toString().length() < 1)) {
+        if (desc.toString().length() >= 1) {
             meta.setLore(desc);
         }
         meta.setOwningPlayer(player);
