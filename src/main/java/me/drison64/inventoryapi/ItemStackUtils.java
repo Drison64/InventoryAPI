@@ -20,7 +20,7 @@ public class ItemStackUtils {
         ItemStack item = new ItemStack(material, count);
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', name));
-        if (!(desc.toString().length() < 1)) {
+        if (desc.toString().length() >= 1) {
             meta.setLore(desc);
         }
         item.setItemMeta(meta);

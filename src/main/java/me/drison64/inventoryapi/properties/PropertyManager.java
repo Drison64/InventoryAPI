@@ -1,6 +1,5 @@
 package me.drison64.inventoryapi.properties;
 
-import me.drison64.inventoryapi.InventoryAPI;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,6 +1,5 @@
 package me.drison64.inventoryapi.properties;
 
-import me.drison64.inventoryapi.CustomInventory;
 import me.drison64.inventoryapi.InventoryAPI;
 import org.bukkit.Bukkit;
 import java.util.List;

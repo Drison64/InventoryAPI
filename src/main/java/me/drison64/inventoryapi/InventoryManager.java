@@ -13,16 +13,14 @@ public class InventoryManager {
 
     private final HashMap<Player, CustomInventory> registeredPlayers;
     private final HashMap<CustomInventory, List<InventoryProperty>> registeredProperties;
-    private final InventoryAPI inventoryAPI;
 
-    public InventoryManager(InventoryAPI inventoryAPI) {
-        this.inventoryAPI = inventoryAPI;
+    public InventoryManager() {
         registeredPlayers = new HashMap<>();
         registeredProperties = new HashMap<>();
     }
 
     public Inventory open(CustomInventory inventory, Player player, InventoryProperty... inventoryProperties) {
-        if (!(registeredPlayers.get(player) == null))   if (inventory.getClass() == registeredPlayers.get(player).getClass())   inventory.setClose(false);
+        if (registeredPlayers.get(player) != null && inventory.getClass() == registeredPlayers.get(player).getClass()) inventory.setClose(false);
         registeredPlayers.put(player, inventory);
         for (InventoryProperty inventoryProperty : inventoryProperties) {
             registerProperty(inventory, inventoryProperty);

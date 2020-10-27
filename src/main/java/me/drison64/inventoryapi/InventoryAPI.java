@@ -16,7 +16,7 @@ public class InventoryAPI {
 
         plugin.getServer().getPluginManager().registerEvents(new EventListener(this), plugin);
 
-        inventoryManager = new InventoryManager(this);
+        inventoryManager = new InventoryManager();
 
         propertyManager = new PropertyManager();
         propertyManager.register(new RefreshProperty(this));
