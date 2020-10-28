@@ -24,7 +24,6 @@ public class EventListener implements Listener {
 
     @EventHandler
     public void onEvent(InventoryClickEvent e) {
-        inventoryAPI.getInventoryManager().getRegisteredPlayers().keySet().forEach(System.out::println);
         if (inventoryAPI.getInventoryManager().getRegisteredPlayers().get((Player) e.getWhoClicked()) == null) return;
         inventoryAPI.getInventoryManager().fire((Player) e.getWhoClicked(), e);
     }

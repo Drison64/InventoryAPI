@@ -45,7 +45,6 @@ public abstract class CustomInventory {
     public Inventory refresh() {
         Inventory inventory_ = null;
         inventory_ = build();
-        System.out.println(inventory_.getContents().length);
         player.getOpenInventory().getTopInventory().setContents(inventory.getContents());
         player.updateInventory();
         return inventory_;
