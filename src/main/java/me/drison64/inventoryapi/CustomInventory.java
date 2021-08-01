@@ -1,13 +1,18 @@
 package me.drison64.inventoryapi;
 
 import me.drison64.inventoryapi.properties.InventoryProperty;
+import org.apache.logging.log4j.core.util.JsonUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+
+import javax.swing.*;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public abstract class CustomInventory {
 
@@ -36,8 +41,8 @@ public abstract class CustomInventory {
         items.put(slot, itemStack);
     }
 
-    public void fill(ItemStack itemStack, Integer maxSize) {
-        for (int i = 0; i < maxSize; i++) {
+    public void fill(ItemStack itemStack) {
+        for (int i = 0; i < size; i++) {
             items.putIfAbsent(i, itemStack);
         }
     }
@@ -60,6 +65,7 @@ public abstract class CustomInventory {
     }
 
     public Inventory doBuild() {
+        this.items = new HashMap<>();
         synchronized (this) {
             init(items);
         }

@@ -2,6 +2,8 @@ package me.drison64.inventoryapi.properties;
 
 import me.drison64.inventoryapi.InventoryAPI;
 import org.bukkit.Bukkit;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class RefreshProperty extends Property {
@@ -10,7 +12,10 @@ public class RefreshProperty extends Property {
         Bukkit.getScheduler().scheduleSyncRepeatingTask(inventoryAPI.getPlugin(), () -> {
 
             inventoryAPI.getInventoryManager().getRegisteredPlayers().values().forEach(customInventory -> {
-                List<InventoryProperty> inventory = inventoryAPI.getInventoryManager().getRegisteredProperties().get(customInventory);
+
+                System.out.println(inventoryAPI.getInventoryManager().getRegisteredPlayers().size());
+
+                List<InventoryProperty> inventory = new ArrayList<>(inventoryAPI.getInventoryManager().getRegisteredProperties().get(customInventory));
 
                 if (inventory.contains(InventoryProperty.Refresh)) {
                     customInventory.refresh();
