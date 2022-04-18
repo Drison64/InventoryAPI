@@ -24,10 +24,11 @@ public abstract class CustomInventory {
     protected InventoryType inventoryType;
     protected Player player;
     protected Inventory inventory;
-    protected InventoryProperty[] properties;
+    protected List<InventoryProperty> properties;
 
     public CustomInventory() {
         this.items = new HashMap<>();
+        this.properties = new ArrayList<>();
         this.close = true;
     }
 

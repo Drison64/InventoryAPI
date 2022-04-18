@@ -6,6 +6,7 @@ import org.bukkit.event.Event;
 import org.bukkit.inventory.Inventory;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -21,9 +22,16 @@ public class InventoryManager {
 
     public Inventory open(CustomInventory inventory, Player player, InventoryProperty... inventoryProperties) {
         if (registeredPlayers.get(player) != null && inventory.getClass() == registeredPlayers.get(player).getClass()) inventory.setClose(false);
-        for (InventoryProperty inventoryProperty : inventoryProperties) {
+        List<InventoryProperty> properties = new ArrayList<>(Arrays.asList(inventoryProperties));
+
+        for (InventoryProperty property : inventory.properties) {
+            if (!properties.contains(property)) properties.add(property);
+        }
+
+        for (InventoryProperty inventoryProperty : properties) {
             registerProperty(inventory, inventoryProperty);
         }
+
         Inventory inventory_ = inventory.build(player);
         player.openInventory(inventory_);
         registeredPlayers.put(player, inventory);
